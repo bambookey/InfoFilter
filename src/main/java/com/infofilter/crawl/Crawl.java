@@ -1,4 +1,4 @@
-package com.infofilter.crawl.impl;
+package com.infofilter.crawl;
 
 import java.util.List;
 
@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
-
-import com.infofilter.crawl.ICrawlFilter;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -19,8 +17,6 @@ import us.codecraft.webmagic.selector.Selectable;
 public class Crawl implements PageProcessor {
 	public static final String URL_LIST = "https://www.douban.com/group/zhufang/discussion";
 	
-	@Autowired
-	CrawlFilterImpl crawlFilterImpl;
     //public static final String URL_POST = "http://auto.163.com/blog/";
 
     private Site site = Site
@@ -31,7 +27,6 @@ public class Crawl implements PageProcessor {
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31");
 
     public void process(Page page) {
-        int cnt = 0;
     	//列表页
         if (page.getUrl().regex(URL_LIST).match()) {
         	System.out.println();
@@ -39,9 +34,6 @@ public class Crawl implements PageProcessor {
         	String title = "";
         	String link = "";
         	for(Selectable s : links) {
-        		if(cnt++ > crawlFilterImpl.getCrawlItemsMax()) {
-        			return;
-        		}
         		title = s.xpath("//a/@title").toString();
         		link = s.xpath("//a/@href").toString();
         		if(title.contains("海淀")) {

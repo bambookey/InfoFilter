@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.infofilter.crawl.impl.Crawl;
+import com.infofilter.crawl.Crawl;
 
 public class CrawlTest {
 
