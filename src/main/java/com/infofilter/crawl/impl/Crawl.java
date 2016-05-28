@@ -1,7 +1,13 @@
-package com.infofilter.crawl;
+package com.infofilter.crawl.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
+import com.infofilter.crawl.ICrawlFilter;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -9,26 +15,33 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Selectable;
 
+@Component
 public class Crawl implements PageProcessor {
 	public static final String URL_LIST = "https://www.douban.com/group/zhufang/discussion";
-
+	
+	@Autowired
+	CrawlFilterImpl crawlFilterImpl;
     //public static final String URL_POST = "http://auto.163.com/blog/";
 
     private Site site = Site
             .me()
-            .setDomain("auto.163.com")	
+            .setDomain("douban.com")	
             .setSleepTime(3000)
             .setUserAgent(
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31");
 
     public void process(Page page) {
-        //列表页
+        int cnt = 0;
+    	//列表页
         if (page.getUrl().regex(URL_LIST).match()) {
         	System.out.println();
         	List<Selectable> links = page.getHtml().xpath("//td[@class='title']").nodes();
         	String title = "";
         	String link = "";
         	for(Selectable s : links) {
+        		if(cnt++ > crawlFilterImpl.getCrawlItemsMax()) {
+        			return;
+        		}
         		title = s.xpath("//a/@title").toString();
         		link = s.xpath("//a/@href").toString();
         		if(title.contains("海淀")) {
@@ -53,9 +66,4 @@ public class Crawl implements PageProcessor {
     	Spider.create(new Crawl()).addUrl(startUrl).run();
     }
     
-    public static void main(String[] args) {
-    	Crawl c = new Crawl();
-    	String startUrl = "https://www.douban.com/group/zhufang/discussion?start=0";
-        c.run(startUrl);
-    }
 }
