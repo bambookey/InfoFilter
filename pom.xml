@@ -20,7 +20,7 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- web magic -->
 		<dependency>
 			<groupId>us.codecraft</groupId>
@@ -32,7 +32,7 @@
 			<artifactId>webmagic-extension</artifactId>
 			<version>0.5.3</version>
 		</dependency>
-		
+
 		<!-- spring3 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -65,10 +65,10 @@
 			<version>3.1.2.RELEASE</version>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>3.1.2.RELEASE</version>
-        </dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>3.1.2.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
@@ -78,6 +78,18 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>3.1.2.RELEASE</version>
+		</dependency>
+
+		<!-- jstl -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
 	<build>
