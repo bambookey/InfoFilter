@@ -13,9 +13,9 @@ public class UrlInfo implements Serializable {
 
 	private static final long serialVersionUID = 991098245104641985L;
 	
-	String href;
+	private String href;
 	
-	String title;
+	private String title;
 
 	public String getHref() {
 		return href;

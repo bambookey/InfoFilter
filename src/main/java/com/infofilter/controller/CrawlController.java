@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.infofilter.crawl.Crawl;
+import com.infofilter.model.SearchConfig;
 import com.infofilter.model.UrlInfo;
 
 @Controller
@@ -25,13 +26,9 @@ public class CrawlController {
 	Crawl crawl;
 	
 	@RequestMapping("/start")
-	public ModelAndView start(String searchUrl) throws InterruptedException {
-	    
-		String startUrl = "https://www.douban.com/group/zhufang/discussion?start=0";
-		if(searchUrl != null && searchUrl.trim().length() != 0) {
-			startUrl = searchUrl;
-		}
-		crawl.run(startUrl);
+	public ModelAndView start(SearchConfig sc) throws InterruptedException {
+		crawl.setSearchConfig(sc);
+		crawl.run(sc.getUrlSeed());
 		List <UrlInfo> urlList = Crawl.urlInfoList;
 		ModelAndView mav = new ModelAndView("result");  
         //将参数返回给页面  
