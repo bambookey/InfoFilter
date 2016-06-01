@@ -23,22 +23,22 @@ import us.codecraft.webmagic.selector.Selectable;
 @Component
 public class Crawl implements PageProcessor {
 	private static Log log = LogFactory.getLog(Crawl.class);
-	
+
 	public static final String URL_LIST = "https://www.douban.com/group/zhufang/discussion";
 
 	public static LinkedList<UrlInfo> urlInfoList = new LinkedList<UrlInfo>();
 
-	public static volatile int crawlCounter = 0;
-	
+	public static int crawlCounter = 0;
+
 	private static SearchConfig searchConfig;
 
 	private Site site = Site.me().setDomain("douban.com").setSleepTime(3000).setUserAgent(
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31");
 
 	public void process(Page page) {
-		
-		System.out.println(searchConfig.getKeys()+":"+searchConfig.getUrlSeed()+":"+searchConfig.getMaxHint());
-		if(searchConfig == null) {
+
+		System.out.println(searchConfig.getKeys() + ":" + searchConfig.getUrlSeed() + ":" + searchConfig.getMaxHint());
+		if (searchConfig == null) {
 			log.error("searchConfig is null!");
 			return;
 		}
@@ -52,19 +52,15 @@ public class Crawl implements PageProcessor {
 				title = s.xpath("//a/@title").toString();
 				link = s.xpath("//a/@href").toString();
 				crawlCounter++;
-				try {
-					if (title.contains(new String(searchConfig.getKeys().getBytes("ISO8859-1"),"UTF-8"))) {
-						System.out.println(title + ":" + link);
-						UrlInfo ui = new UrlInfo(title, link);
-						urlInfoList.add(ui);
-						System.out.println(urlInfoList.size() + ":" + crawlCounter);
-						if (urlInfoList.size() > searchConfig.getMaxHint() || crawlCounter > searchConfig.getMaxCrawl()) {
-							return;
-						}
+
+				if (title.contains(searchConfig.getKeys())) {
+					System.out.println(title + ":" + link);
+					UrlInfo ui = new UrlInfo(title, link);
+					urlInfoList.add(ui);
+					System.out.println(urlInfoList.size() + ":" + crawlCounter);
+					if (urlInfoList.size() > searchConfig.getMaxHint() || crawlCounter > searchConfig.getMaxCrawl()) {
+						return;
 					}
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 			}
 
@@ -84,7 +80,7 @@ public class Crawl implements PageProcessor {
 	public void run(String startUrl) {
 		Spider.create(new Crawl()).addUrl(startUrl).run();
 	}
-	
+
 	public SearchConfig getSearchConfig() {
 		return searchConfig;
 	}
