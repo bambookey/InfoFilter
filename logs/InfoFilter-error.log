@@ -1,15 +1,25 @@
-[InfoFilter-ERROR 2016-05-29 04:22:26] us.codecraft.webmagic.Spider$1.run(Spider.java:326) | process request Request{url='https://www.douban.com/group/zhufang/discussion?start=0', method='null', extras={statusCode=200}, priority=0} error
+[InfoFilter-ERROR 2016-06-01 23:29:40] us.codecraft.webmagic.Spider$1.run(Spider.java:326) | process request Request{url='https://www.douban.com/group/zufan/discussion?start=0', method='null', extras={statusCode=200}, priority=0} error
 java.lang.NullPointerException
-	at com.infofilter.crawl.impl.Crawl.process(Crawl.java:42)
+	at com.infofilter.crawl.Crawl.process(Crawl.java:40)
 	at us.codecraft.webmagic.Spider.processRequest(Spider.java:421)
 	at us.codecraft.webmagic.Spider$1.run(Spider.java:322)
 	at us.codecraft.webmagic.thread.CountableThreadPool$1.run(CountableThreadPool.java:74)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
-[InfoFilter-ERROR 2016-05-29 04:24:26] us.codecraft.webmagic.Spider$1.run(Spider.java:326) | process request Request{url='https://www.douban.com/group/zhufang/discussion?start=0', method='null', extras={statusCode=200}, priority=0} error
-java.lang.NullPointerException
-	at com.infofilter.crawl.impl.Crawl.process(Crawl.java:42)
+[InfoFilter-ERROR 2016-06-01 23:45:41] us.codecraft.webmagic.Spider$1.run(Spider.java:326) | process request Request{url='https://www.douban.com/group/zufan/discussion?start=0', method='null', extras={statusCode=200}, priority=0} error
+java.util.regex.PatternSyntaxException: Dangling meta character '?' near index 0
+?
+^
+	at java.util.regex.Pattern.error(Pattern.java:1955)
+	at java.util.regex.Pattern.sequence(Pattern.java:2123)
+	at java.util.regex.Pattern.expr(Pattern.java:1996)
+	at java.util.regex.Pattern.compile(Pattern.java:1696)
+	at java.util.regex.Pattern.<init>(Pattern.java:1351)
+	at java.util.regex.Pattern.compile(Pattern.java:1028)
+	at java.lang.String.split(String.java:2380)
+	at java.lang.String.split(String.java:2422)
+	at com.infofilter.crawl.Crawl.process(Crawl.java:46)
 	at us.codecraft.webmagic.Spider.processRequest(Spider.java:421)
 	at us.codecraft.webmagic.Spider$1.run(Spider.java:322)
 	at us.codecraft.webmagic.thread.CountableThreadPool$1.run(CountableThreadPool.java:74)

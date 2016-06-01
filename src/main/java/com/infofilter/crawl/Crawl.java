@@ -24,7 +24,7 @@ import us.codecraft.webmagic.selector.Selectable;
 public class Crawl implements PageProcessor {
 	private static Log log = LogFactory.getLog(Crawl.class);
 
-	public static final String URL_LIST = "https://www.douban.com/group/zhufang/discussion";
+	public static String URL_LIST = "https://www.douban.com/group/zhufang/discussion";
 
 	public static LinkedList<UrlInfo> urlInfoList = new LinkedList<UrlInfo>();
 
@@ -41,11 +41,14 @@ public class Crawl implements PageProcessor {
 		if (searchConfig == null) {
 			log.error("searchConfig is null!");
 			return;
-		}
+		} 
+		
+		URL_LIST = searchConfig.getUrlSeed().split("\\?")[0];
 		// 列表页
 		if (page.getUrl().regex(URL_LIST).match()) {
 			System.out.println();
 			List<Selectable> links = page.getHtml().xpath("//td[@class='title']").nodes();
+			System.out.println(links.size());
 			String title = "";
 			String link = "";
 			for (Selectable s : links) {
@@ -77,8 +80,8 @@ public class Crawl implements PageProcessor {
 		return site;
 	}
 
-	public void run(String startUrl) {
-		Spider.create(new Crawl()).addUrl(startUrl).run();
+	public void run() {
+		Spider.create(new Crawl()).addUrl(searchConfig.getUrlSeed()).run();
 	}
 
 	public SearchConfig getSearchConfig() {

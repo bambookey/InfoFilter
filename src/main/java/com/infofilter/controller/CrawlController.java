@@ -28,7 +28,7 @@ public class CrawlController {
 	@RequestMapping("/start")
 	public ModelAndView start(SearchConfig sc) throws InterruptedException {
 		crawl.setSearchConfig(sc);
-		crawl.run(sc.getUrlSeed());
+		crawl.run();
 		List <UrlInfo> urlList = Crawl.urlInfoList;
 		ModelAndView mav = new ModelAndView("result");  
         //将参数返回给页面  
