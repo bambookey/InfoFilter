@@ -8,11 +8,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Results</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/common.css">
 </head>
 <body>
 	<ul>
 		<c:forEach items="${urlList}" var="url">
-			<li><a href="${url.href}">${url.title}</a></li>
+			<li class="list"><a href="${url.href}">${url.title}</a></li>
 		</c:forEach>
 	</ul>
 </body>

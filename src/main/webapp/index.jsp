@@ -6,11 +6,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>InfoFilter</title>
+<link rel="stylesheet" type="text/css" href="css/common.css">
+</head>
 <body>
-	<h2>InfoFilter</h2>
 	<form action="crawl/start" method="post">
 		<ul>
-			<li>种子链接<input type="text" name="urlSeed" style="width: 400px;"
+			<li class="red">种子链接<input type="text" name="urlSeed" style="width: 400px;"
 				value="https://www.douban.com/group/zhufang/discussion?start=0"></li>
 			<li>最大结果数<input type="text" name="maxHint" value="10"></li>
 			<li>最大抓取数<input type="text" name="maxCrawl" value="100"></li>

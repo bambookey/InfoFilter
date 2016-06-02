@@ -32,7 +32,7 @@ public class Crawl implements PageProcessor {
 
 	private static SearchConfig searchConfig;
 
-	private Site site = Site.me().setDomain("douban.com").setSleepTime(3000).setUserAgent(
+	private Site site = Site.me().setDomain("douban.com").setSleepTime(1000).setUserAgent(
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31");
 
 	public void process(Page page) {
@@ -41,8 +41,8 @@ public class Crawl implements PageProcessor {
 		if (searchConfig == null) {
 			log.error("searchConfig is null!");
 			return;
-		} 
-		
+		}
+
 		URL_LIST = searchConfig.getUrlSeed().split("\\?")[0];
 		// 列表页
 		if (page.getUrl().regex(URL_LIST).match()) {
@@ -56,7 +56,7 @@ public class Crawl implements PageProcessor {
 				link = s.xpath("//a/@href").toString();
 				crawlCounter++;
 
-				if (title.contains(searchConfig.getKeys())) {
+				if (containsKeyOr(title)) {
 					System.out.println(title + ":" + link);
 					UrlInfo ui = new UrlInfo(title, link);
 					urlInfoList.add(ui);
@@ -90,5 +90,15 @@ public class Crawl implements PageProcessor {
 
 	public void setSearchConfig(SearchConfig searchConfig) {
 		this.searchConfig = searchConfig;
+	}
+
+	public boolean containsKeyOr(String title) {
+		String[] keys = searchConfig.getKeys().split("#");
+		for (String s : keys) {
+			if (title.contains(s)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
