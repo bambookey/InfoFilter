@@ -27,7 +27,17 @@ public class SearchConfig {
 	 * 关键字集合
 	 */
 	private String keys;
+	/**
+	 * 过滤关键字集合
+	 */
+	private String filterKeys;
 	
+	public String getFilterKeys() {
+		return filterKeys;
+	}
+	public void setFilterKeys(String filterKeys) {
+		this.filterKeys = filterKeys;
+	}
 	public String getUrlSeed() {
 		return urlSeed;
 	}

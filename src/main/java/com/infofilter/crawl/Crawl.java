@@ -37,7 +37,7 @@ public class Crawl implements PageProcessor {
 
 	public void process(Page page) {
 
-		System.out.println(searchConfig.getKeys() + ":" + searchConfig.getUrlSeed() + ":" + searchConfig.getMaxHint());
+		System.out.println(searchConfig.getKeys() + ":" + searchConfig.getFilterKeys() + ":" + searchConfig.getUrlSeed() + ":" + searchConfig.getMaxHint());
 		if (searchConfig == null) {
 			log.error("searchConfig is null!");
 			return;
@@ -56,7 +56,7 @@ public class Crawl implements PageProcessor {
 				link = s.xpath("//a/@href").toString();
 				crawlCounter++;
 
-				if (containsKeyOr(title)) {
+				if (containsKeyOr(title) && notContainsKeyOr(title)) {
 					System.out.println(title + ":" + link);
 					UrlInfo ui = new UrlInfo(title, link);
 					urlInfoList.add(ui);
@@ -95,10 +95,25 @@ public class Crawl implements PageProcessor {
 	public boolean containsKeyOr(String title) {
 		String[] keys = searchConfig.getKeys().split("#");
 		for (String s : keys) {
+			if(s.trim().length() == 0)
+				continue;
 			if (title.contains(s)) {
 				return true;
 			}
 		}
 		return false;
 	}
+	
+	public boolean notContainsKeyOr(String title) {
+		String[] keys = searchConfig.getFilterKeys().split("#");
+		for (String s : keys) {
+			if(s.trim().length() == 0)
+				continue;
+			if (title.contains(s)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }
