@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -81,6 +82,7 @@ public class Crawl implements PageProcessor {
 	}
 
 	public void run() {
+		this.clear();
 		Spider.create(new Crawl()).addUrl(searchConfig.getUrlSeed()).run();
 	}
 
@@ -89,9 +91,14 @@ public class Crawl implements PageProcessor {
 	}
 
 	public void setSearchConfig(SearchConfig searchConfig) {
-		this.searchConfig = searchConfig;
+		Crawl.searchConfig = searchConfig;
 	}
-
+	
+	public void clear() {
+		Crawl.urlInfoList.clear();
+		Crawl.crawlCounter = 0;
+	}
+	
 	public boolean containsKeyOr(String title) {
 		String[] keys = searchConfig.getKeys().split("#");
 		for (String s : keys) {
