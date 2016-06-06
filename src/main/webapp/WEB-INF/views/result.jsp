@@ -8,11 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Results</title>
-<style type="text/css">
-.list{margin:5px;}
-.list a{color:#666; text-decoration:none;}
-.list a:hover{color:#F60;}
-</style>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
 </head>
 <body>
 	<ul>

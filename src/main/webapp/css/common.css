@@ -1,5 +1,4 @@
 @CHARSET "UTF-8";
-.list{color:#666;}
-.list:hover{color:#F00;}
-
-.red{ color:#F00;}
+.list{margin:5px;}
+.list a{color:#666; text-decoration:none;}
+.list a:hover{color:#F60;}
