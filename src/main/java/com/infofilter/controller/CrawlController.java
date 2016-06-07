@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -28,6 +30,7 @@ public class CrawlController {
 	
 	@RequestMapping("/start")
 	public ModelAndView start(SearchConfig sc) throws InterruptedException {
+		Log log = LogFactory.getLog(CrawlController.class);
 		crawl.setSearchConfig(sc);
 		crawl.run();
 		List <UrlInfo> urlList = Crawl.urlInfoList;
